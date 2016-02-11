@@ -1,0 +1,123 @@
+﻿@model PTS.Personnel
+
+@{
+    ViewBag.Title = "Edit";
+    PetaPoco.Database db = PersonelTakipSis.Models.PtsDb.Instance;
+    List<PTS.Department> departments = db.Fetch<PTS.Department>("Select * From Department");
+     
+}
+
+@using (Html.BeginForm("Edit", "Personnel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{   
+
+    <div class="container">
+        <div id="create">
+            <h3>Edit Personnel</h3>
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+            <hr />
+            <div class="jumbotron">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PhotoPath)
+                </div>
+                <div class="editor-field">
+                    <img src="@Url.Content(Model.PhotoPath)" alt="" width="100px"/>
+                    <input type="file" id="file" name="file" />
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationSummary(true, "Photo must be jpeg or png")
+                </div>
+
+                @if (@Model.AdliSicilKaydi != null)
+                {   
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.AdliSicilKaydi)
+                        @Html.ActionLink("Download", "Downloads", new { filePath = @Model.AdliSicilKaydi })
+                    </div>
+                }
+
+                @if (@Model.SaglikRaporu != null)
+                {  
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SaglikRaporu)
+                        @Html.ActionLink("Download", "Downloads", new { filePath = @Model.SaglikRaporu })
+                    </div>
+                }
+
+                @if (@Model.Diploma != null)
+                {
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Diploma)
+
+                        @Html.ActionLink("Downloads", "Personnel", new { filePath = @Model.Diploma })
+                    </div>
+                }
+
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Name)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Name)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Surname)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.Surname)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Surname)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.TC)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.TC)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.TC)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.EntryDate)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.EntryDate)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.EntryDate)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ExitDate)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.ExitDate)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ExitDate)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.DepartmentName)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.DepartmentID, new SelectList(departments, "ID", "DepName"))
+                    @Html.ValidationMessageFor(model => model.ExitDate)
+                </div>
+
+                <h5>
+                    <input type="submit" value="Edit" class="btn btn-primary" />
+                </h5>
+            </div>
+        </div>
+    </div>
+}
+

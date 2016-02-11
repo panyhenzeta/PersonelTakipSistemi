@@ -1,0 +1,59 @@
+﻿@model PTS.Personnel
+
+@{
+    ViewBag.Title = "Uploads";   
+}
+
+@using (Html.BeginForm("Uploads", "Personnel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="container">
+        <div id="create">
+            <h3>Upload File</h3>
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+            <hr />
+            <div class="jumbotron">
+                <div class="editor-field">
+                    <img src="@Url.Content(Model.PhotoPath)" alt="" width="100px"/>
+                </div>
+
+                <div class="editor-field">
+                    @Html.DisplayTextFor(model => model.Name)
+                </div>
+
+                <div class="editor-field">
+                    @Html.DisplayTextFor(model => model.Surname)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.AdliSicilKaydi)
+                </div>
+                <div class="editor-field">
+                    <input type="file" id="fileAdliSicilKaydi" name="files" />
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SaglikRaporu)
+                </div>
+                <div class="editor-field">
+                    <input type="file" id="fileSaglikRaporu" name="files" />
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Diploma)
+                </div>
+                <div class="editor-field">
+                    <input type="file" id="fileDiploma" name="files" />
+                </div>
+
+                <h5>
+                    <input type="submit" value="Save File or Files" class="btn btn-primary" />
+                </h5>
+            </div>
+        </div>
+    </div>
+}

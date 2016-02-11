@@ -1,0 +1,167 @@
+﻿/*    --------------------------------------------------
+	:: Login Section
+	-------------------------------------------------- */
+#login {
+    padding-top: 50px;
+}
+
+    #login .form-wrap {
+        width: 30%;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #818080;
+        border-radius: 15px;
+        background-color: white;
+        color: #444;
+    }
+
+    #login h1 {
+        color: #1fa67b;
+        font-size: 17px;
+        text-align: center;
+        font-weight: bold;
+        padding-bottom: 10px;
+    }
+
+    #login .form-group {
+        margin-bottom: 25px;
+    }
+
+    #login .checkbox {
+        margin-bottom: 20px;
+        position: relative;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+
+        #login .checkbox.show:before {
+            content: '\e013';
+            color: #1fa67b;
+            font-size: 15px;
+            margin: 1px 0 0 3px;
+            position: absolute;
+            pointer-events: none;
+            font-family: 'Glyphicons Halflings';
+        }
+
+        #login .checkbox .character-checkbox {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        #login .checkbox .label {
+            color: #6d6d6d;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+    #login .btn.btn-custom {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .field-validation-error, .validation-summary-errors {
+        color: #D8000C;
+        font-weight: bold;
+    }
+
+
+/*    --------------------------------------------------
+	:: Inputs & Buttons
+	-------------------------------------------------- */
+.form-control {
+    color: #212121;
+}
+
+.btn-custom {
+    color: #fff;
+    background-color: #1fa67b;
+}
+
+    .btn-custom:hover,
+    .btn-custom:focus {
+        color: #fff;
+    }
+
+
+/*    --------------------------------------------------
+	:: Off Login Autocomplete
+	-------------------------------------------------- */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/*    --------------------------------------------------
+	:: menu bar 
+	-------------------------------------------------- */
+.list-group-item.dropdown {
+    background-color: #1fa67b;
+}
+
+    .list-group-item.dropdown a {
+        color: #eee;
+        text-decoration: none;
+    }
+
+.grid-mvc {
+    background-color: rgba(78, 93, 108, 0);
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px dashed #999;
+}
+
+
+#create {
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    width:50%;
+}
+
+/*    --------------------------------------------------
+	:: Editor field and label
+	-------------------------------------------------- */
+
+.editor-label label {
+    color: #fff;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.editor-field input {
+    background-color: #eee;
+}
+
+input[type="file"] {
+    background-color: transparent;
+}
+
+select {
+    background-color: #eee;
+}
+
+/*-------------------------------------------------- */
+
+input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px #eee inset; /* Change the color to your own background color */
+    -webkit-text-fill-color: rgb(117, 117, 117);
+}
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: /*your box-shadow*/,0 0 0 50px #eee inset;
+    -webkit-text-fill-color: rgb(117, 117, 117);
+}
+input:-webkit-autofill:active {
+    -webkit-box-shadow: /*your box-shadow*/,0 0 0 50px #eee inset;
+    -webkit-text-fill-color: rgb(117, 117, 117);
+}

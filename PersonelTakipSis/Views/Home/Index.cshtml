@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Log On";
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    @Html.Partial("~/Views/Shared/_TopPartial.cshtml")
+    <div id="home">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-3">
+                <div class="list-group table-of-contents">                    
+                    @Html.Partial("~/Views/Shared/_RolePartial.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

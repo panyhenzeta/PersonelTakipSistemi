@@ -1,0 +1,103 @@
+﻿@model PTS.Personnel
+
+@{
+    ViewBag.Title = "Create";
+    PetaPoco.Database db = PersonelTakipSis.Models.PtsDb.Instance;
+    List<PTS.Department> departments = db.Fetch<PTS.Department>("Select * From Department");
+}
+
+@using (Html.BeginForm("Create", "Personnel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken() 
+    
+    <div class="container">
+        <div id="create">
+            <h3>New Personnel</h3>
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+            <hr />
+            <div class="jumbotron">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PhotoPath)
+                </div>
+                <div class="editor-field">
+                    <input type="file" id="file" name="file" />
+                </div>
+                <div class="editor-field">
+                     @Html.ValidationSummary(true, "Photo is required and must be jpeg or png file")
+                </div>
+
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Name)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.Name)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Surname)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.Surname)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.Surname)
+
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.TC)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.TC)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.TC)
+
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.EntryDate)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.EntryDate)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.EntryDate,  new { @Value = DateTime.Now})
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ExitDate)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.ExitDate)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ExitDate)
+
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.DepartmentName)
+                </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.ExitDate)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.DepartmentID, new SelectList(departments, "ID", "DepName"))
+                </div>
+
+                <h5>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </h5>
+            </div>
+        </div>
+    </div>
+}
+
+

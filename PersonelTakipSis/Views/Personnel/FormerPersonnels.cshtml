@@ -1,0 +1,82 @@
+﻿@model List<PTS.Personnel>
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Former Personnels";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/gridmvc.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+</head>
+<body>
+    <div class="">
+        @Html.Partial("~/Views/Shared/_TopPartial.cshtml")
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-3">
+                <div class="list-group table-of-contents">
+                    @Html.Partial("~/Views/Shared/_RolePartial.cshtml")
+                </div>
+            </div>
+
+            <div class="col-lg-10 col-md-10 col-sm-9">
+                <h3>Former Personnels</h3>
+                <hr />
+
+                @Html.Grid(Model).Columns(columns =>
+                {
+                    columns.Add()
+                        .Encoded(false)
+                        .Sanitized(false)
+                        .SetWidth(30)
+                        .RenderValueAs(p =>
+                            @<b>
+                                 @Html.ActionLink("Delete", "DeleteFormer", "Personnel", new { ID = p.ID },  new { onclick = "return confirm('Are you sure you wish to delete this Personnel?');" })
+                            </b>);
+                    
+                    columns.Add(m => m.Name)
+                        .Titled("Name")
+                        .SetWidth(80);
+
+                    columns.Add(m => m.Surname)
+                    .Titled("Surname")
+                    .SetWidth(80);
+
+                    columns.Add(m => m.TC)
+                        .Titled("TC")
+                        .Filterable(true)
+                        .SetWidth(100);
+
+                    columns.Add(m => m.EntryDate)
+                       .Titled("EntryDate")
+                       .Format("{0:dd/MM/yyyy}")
+                       .Filterable(true)
+                       .SetWidth(100);
+
+                    columns.Add(m => m.ExitDate)
+                     .Titled("ExitDate")
+                     .Format("{0:dd/MM/yyyy}")
+                     .SetWidth(80);
+
+                    columns.Add(m => m.DepartmentName)
+                   .Titled("Department")
+                   .SetWidth(80);
+
+                }).WithPaging(15).Sortable().Selectable(false)
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

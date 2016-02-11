@@ -1,0 +1,27 @@
+﻿<div class="list-group-item dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
+    <div class="dropdown-menu" role="menu">
+        @{
+            List<PTS.Role> userRoles = Session["Roles"] as List<PTS.Role>;
+
+
+            foreach (PTS.Role userRole in userRoles)
+            {
+                if (userRole.Name == "Personel")
+                {            
+                    <a class ="list-group-item" href="@Url.Action("Index", "Home")">Role Personnel </a>
+                    continue;
+                }
+
+                else if (userRole.Name == "Admin")
+                {
+                    <a class ="list-group-item" href="@Url.Action("FormerPersonnels", "Personnel")">Former Personnels </a>
+                    <a class ="list-group-item" href="@Url.Action("Index", "Personnel")">Personnel Processes </a>
+                    continue;
+                }
+            }    
+        }
+    </div>
+</div>
+
+
