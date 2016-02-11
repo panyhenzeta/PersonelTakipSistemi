@@ -4,15 +4,77 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/Content/Site.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/gridmvc.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+
     @Scripts.Render("~/bundles/modernizr")
-    
+
 </head>
 <body>
     @RenderBody()
+   @* <script>
+        $(function () {
+            $("#dialog-modal").dialog({
+                autoOpen: false,
+                width: 300,
+                height: 250,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                }
+            });
 
-    @Scripts.Render("~/bundles/jquery")
+            document.getElementsByClassName("modal-opener").click(function () {
+                $("#dialog-modal").dialog("open");
+            });
+            //$('.modal-opener').click(function () {
+            //    $("#dialog-modal").dialog("open");
+            //});
+        });
+
+        //var deleteLinkObj;
+        //// delete Link
+        //$('.delete-link').click(function () {
+        //    deleteLinkObj = $(this);  //for future use
+        //    $('#delete-dialog').dialog('open');
+        //    return false; // prevents the default behaviour
+        //});
+
+        //$('#delete-dialog').dialog({
+        //    autoOpen: false, width: 400, resizable: false, modal: true, //Dialog options
+        //    buttons: {
+        //        "Continue": function () {
+        //            $.post(deleteLinkObj[0].href, function (data) {  //Post to action
+        //                if (data == '<%= Boolean.TrueString %>') {
+        //                    deleteLinkObj.closest("tr").hide('fast'); //Hide Row
+        //                    //(optional) Display Confirmation
+        //                }
+        //                else {
+        //                    //(optional) Display Error
+        //                }
+        //            });
+        //            $(this).dialog("close");
+        //        },
+        //        "Cancel": function () {
+        //            $(this).dialog("close");
+        //        }
+        //    }
+        //});
+
+
+    </script>*@
+
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
