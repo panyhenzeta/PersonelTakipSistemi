@@ -176,7 +176,7 @@ namespace PTS
 
         [Required]
         [Column]
-        [RegularExpression(@"^(\d{11})$", ErrorMessage = "Please enter 11 digits")] 
+        [RegularExpression(@"^(\d{11})$", ErrorMessage = "Please enter 11 digits")]
         public string TC { get; set; }
 
 
@@ -357,14 +357,14 @@ namespace PTS
 
 
 
-
+        [Required]
         [Column]
         public string Username { get; set; }
 
 
 
 
-
+        [Required]
         [Column]
         public string Password { get; set; }
 

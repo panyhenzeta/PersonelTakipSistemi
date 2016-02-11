@@ -70,18 +70,16 @@ namespace PersonelTakipSis.Controllers
                         isActivePersonel(personnel);
                         db.Insert(personnel);
 
-                        //Save Image File To Local
-                        string pic = "Image_" + personnel.ID + ".png";
-                        var image = System.Drawing.Image.FromStream(file.InputStream);
-                        string path = System.IO.Path.Combine(HttpContext.Server.MapPath("~/Uploads/Images"), pic);
-                        file.SaveAs(path);
+                        //Save Image File to Local
+                        string imagePath = "~/Uploads/Images/" + "Image_" + personnel.ID + ".png";
+                        saveImage(file, imagePath);
 
-                        personnel.PhotoPath = "~/Uploads/Images/" + pic;
+                        //Save Image Path to DB and Update Personnel
+                        personnel.PhotoPath = imagePath;
                         db.Update(personnel);
 
                         return RedirectToAction("Index");
                     }
-
                 }
                 catch (Exception)
                 {
@@ -89,19 +87,6 @@ namespace PersonelTakipSis.Controllers
                 }
             }
             return View(personnel);
-
-        }
-
-        private void isActivePersonel(Personnel personnel)
-        {
-            if (personnel.ExitDate.HasValue)
-            {
-                personnel.isActive = false;
-            }
-            else
-            {
-                personnel.isActive = true;
-            }
         }
 
 
@@ -118,32 +103,42 @@ namespace PersonelTakipSis.Controllers
         {
             if (ModelState.IsValid)
             {
-                if ((file != null && isImageValid(file)) || (file == null))
+                if ((file != null && isImageValid(file)))
                 {
                     personnel.PhotoPath = getPersonnel(personnel.ID).PhotoPath;
-                    try
-                    {
-                        isActivePersonel(personnel);
-                        db.Update(personnel);
-                        return RedirectToAction("Index");
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
+                    deletePersonnelFiles(personnel.PhotoPath);
+                    saveImage( file, personnel.PhotoPath);
+                    return editPersonel(personnel);
+                }
+                else if (file == null)
+                {
+                    personnel.PhotoPath = getPersonnel(personnel.ID).PhotoPath;
+                    return editPersonel(personnel);
                 }
                 else if (file != null && !isImageValid(file))
                 {
                     ModelState.AddModelError(String.Empty, String.Empty);
                 }
-
             }
             else
             {
                 personnel.PhotoPath = getPersonnel(personnel.ID).PhotoPath;
             }
             return View(personnel);
+        }
 
+        private ActionResult editPersonel(Personnel personnel)
+        {
+            try
+            {
+                isActivePersonel(personnel);
+                db.Update(personnel);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         // Delete Personnel
@@ -191,6 +186,12 @@ namespace PersonelTakipSis.Controllers
             if (System.IO.File.Exists(saglikRaporuPath)) { System.IO.File.Delete(saglikRaporuPath); }
             if (System.IO.File.Exists(diplomaPath)) { System.IO.File.Delete(diplomaPath); }
 
+        }
+
+        private void deletePersonnelFiles(string imagePath)
+        {
+            string getPath = System.IO.Path.Combine(HttpContext.Server.MapPath(imagePath));
+            if (System.IO.File.Exists(getPath)) { System.IO.File.Delete(getPath); }
         }
 
         //Upload
@@ -253,6 +254,27 @@ namespace PersonelTakipSis.Controllers
             var personnel = db.SingleOrDefault<Personnel>("Select p.*, d.DepName DepartmentName From Personnel p Join Department d On p.DepartmentID = d.ID Where p.ID = @0", ID);
             return personnel;
         }
+
+        private void isActivePersonel(Personnel personnel)
+        {
+            if (personnel.ExitDate.HasValue)
+            {
+                personnel.isActive = false;
+            }
+            else
+            {
+                personnel.isActive = true;
+            }
+        }
+
+        // Save image to local
+        private void saveImage(HttpPostedFileBase file, string imageName)
+        {
+            var image = System.Drawing.Image.FromStream(file.InputStream);
+            string path = System.IO.Path.Combine(HttpContext.Server.MapPath(imageName));
+            file.SaveAs(path);
+        }
+
 
         // Is it Image file or not
         private bool isImageValid(HttpPostedFileBase file)
